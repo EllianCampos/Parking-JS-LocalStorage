@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
+    <title>Parqueo PZ</title>
+</head>
+
+<body>
+    <header class="header">
+        <h1 class="header__title">Parqueo PZ</h1>
+        <button class="header__button-Push" id="btnPushVehicle">Ingresar un vehículo</button>
+        <button class="header__button-register" id="btnRegister">Historial</button>
+        <button class="header__button-settings" id="btnSettings">Configuración</button>
+    </header>
+    
+    <!-- Table vechiculos -->
+    <table class="table" id="tableEnteredVehicles">
+        <thead id="tableEnteredVehicles__head">
+            <tr>
+                <th>Número de placa</th>
+                <th>tipo de vehículo</th>
+                <th>Hora de ingreso</th>
+                <th>Observaciones</th>
+                <th></th>
+              </tr>
+        </thead>
+        <tbody id="tableEnteredVehicles__body"></tbody>
+    </table>
+
+    <!-- Form register vehicles -->
+    <div class="customWindow hide" id="customWindow_register">
+        <a href="index.html">Cancelar</a>
+        <table class="table" id="tableRegister">
+            <thead id="tableRegister__head">
+                <tr>
+                    <th>Número de placa</th>
+                    <th>tipo de vehículo</th>
+                    <th>Hora de ingreso</th>
+                    <th>Observaciones</th>
+                    <th></th>
+                  </tr>
+            </thead>
+            <tbody id="tableRegister__body"></tbody>
+        </table>
+    </div>
+
+    <!-- Form Settings -->
+    <div class="customWindow hide" id="customWindow_settings">
+        <a href="index.html">Cancelar</a>
+        <form class="form" id="formSettings">
+            <div class="Form_field">
+                <label for="formSettings_PricePerMinute">Precio por minuto</label>
+                <input type="text" id="formSettings_PricePerMinute">
+            </div>     
+            <input type="submit" value="Actualizar">       
+        </form>
+    </div>
+
+    <!-- Form push vehicle -->
+    <div class="customWindow hide" id="customWindow_push">
+        <a href="index.html">Cancelar</a>
+
+        <form class="form" id="formPush">
+            <div class="Form__field">
+                <label for="Id">ID</label>
+                <input type="number" name="" id="formIn_id">
+            </div>
+            <div class="Form__field">
+                <label for="plateNumber"># Placa</label>
+                <input type="text" name="" id="formIn_plateNumber">
+            </div>
+            <div class="Form__field">
+                <label for="formIn_selectTypeVehicule">Tipo de vehículo</label>
+                <select name="" id="formIn_selectTypeVehicule">
+                    <option value="No seleccionado">Elegir...</option>
+                    <option value="Motocicleta">Motocicleta</option>
+                    <option value="Vehiculo liviano">Vehiculo liviano</option>
+                </select>
+            </div>
+            <div class="Form__field">
+                <label for="TimeInput">Hora de entrada</label>
+                <input type="time" name="" id="formIn_hourInput">
+            </div>
+            <div class="Form__field">
+                <label for="observations">Observaciones</label>
+                <input type="text" name="" id="formIn_observations">
+            </div>
+            <input type="submit" value="Registrar Entrada">
+        </form>
+    </div>
+
+    <!-- Form check out vehicle -->
+    <div class="customWindow hide" id="customWindow_out">
+        <a href="index.html">Cancelar</a>
+
+        <form class="form" id="formOut">
+            <div class="Form__field">
+                <label for="Id">ID</label>
+                <input type="number" name="" id="formOut_id">
+            </div>
+            <div class="Form__field">
+                <label for="plateNumber"># Placa</label>
+                <input type="text" name="" id="formOut_plateNumber">
+            </div>
+            <div class="Form__field">
+                <label for="formOut_selectTypeVehicule">Tipo de vehículo</label>
+                <select name="" id="formOut_selectTypeVehicule">
+                    <option value="empty">Elegir...</option>
+                    <option value="motorcycle">Motocicleta</option>
+                    <option value="car">Carro</option>
+                </select>
+            </div>
+            <div class="Form__field">
+                <label for="formOut_hourInput">Hora de entrada</label>
+                <input type="time" name="" id="formOut_hourInput">
+            </div>
+            <div class="Form__field">
+                <label for="formOut_observations">Observaciones</label>
+                <input type="text" name="" id="formOut_observations">
+            </div>
+            <div class="Form__field">
+                <label for="">Hora de salida</label>
+                <input type="time" name="" id="formOut_hourOutput">
+            </div>
+            <input type="submit" value="Registrar salida">
+        </form>
+    </div>
+
+    <script src="js/functions.js"></script>
+    <script src="js/index.js"></script>
+</body>
+
+</html>

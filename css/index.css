@@ -1,0 +1,153 @@
+:root{
+    --Main_app_color: #0066CC;
+    --Green: #46932c;
+    --Orange: #ff832b;
+    --Table_even_row: #7ac591;
+    --Table_odd_row: #5b94cd;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    font-family: sans-serif;
+    text-align: center;    
+    margin: 0;
+}
+
+.header{
+    width: 100vw;
+    margin: 0;
+    display: grid;
+    grid-template-areas: 'title title'
+                         'push push'
+                         'register settings';
+}
+
+.header__title{
+    grid-area: title;
+    background-color: var(--Main_app_color);
+    color: white;
+    padding: 10px;
+    margin: 0; 
+}
+
+.header__button-Push{
+    grid-area: push;
+    justify-self: center;
+    width: 80%;   
+    margin: 10px;
+    background: var(--Orange);
+}
+
+.header__button-register{
+    grid-area: register;
+    justify-self: right;
+}
+
+.header__button-settings{
+    grid-area: settings;
+    justify-self: left;
+}
+
+.header__button-Push,
+.header__button-register,
+.header__button-settings{
+    margin: 10px 5px;
+    padding: 15px;    
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: 1000;
+}
+
+.header__button-register,
+.header__button-settings{
+    width: calc(80% - 10px);
+    background: var(--Green);
+}
+
+.table{
+    width: 100vw;
+
+    /* Evitar la separacion entre los campos */
+    border-collapse: collapse;
+
+    /* Evitar que se seleccione contenido de la tabla */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
+}
+
+.table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: var(--Green);
+    color: white;
+}
+
+.table th,
+.table td{
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.table tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+.table tr:hover {
+    background-color: #ddd;
+}
+
+.customWindow{
+    position: absolute;
+    top: 0; right: 0;
+    width: 100%;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+}
+
+.form{
+    border: 3px solid var(--Main_app_color);
+    width: 300px;
+    padding: 25px;
+    border-radius: 25px;
+    text-align: center;
+}
+
+.Form__field{
+    margin: 10px 20px;
+    text-align: left;
+}
+
+.Form__field,
+.Form__field input,
+.Form__field label,
+.form input[type="submit"],
+.Form__field select{
+    font-size: 1.1em;
+    width: 200px;
+}
+
+a{
+    position: absolute;
+    top: 5px;
+    font-size: 1.2em;
+    padding: 20px;
+    border-radius: 5px;
+    background: red;
+    color: white;
+    text-decoration: none;
+}
+
+.hide{
+    display: none;
+}
+
