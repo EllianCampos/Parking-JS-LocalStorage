@@ -55,6 +55,7 @@ const showOutput = () => {
   customWindow_push.classList.add('hide')
   customWindow_register.classList.add('hide')
   customWindow_settings.classList.add('hide')
+  tableEnteredVehicles.classList.add('hide')
   customWindow_out.classList.remove('hide')
 };
 
