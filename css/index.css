@@ -152,3 +152,8 @@ a{
     display: none;
 }
 
+@media all and (max-width: 480px) {
+    .table{
+        font-size: 0.7em;
+    }
+}
