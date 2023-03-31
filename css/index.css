@@ -152,3 +152,11 @@ a{
     display: none;
 }
 
+@media all and (max-width: 480px) {
+    .table{
+        font-size: 0.5em;
+    }
+    .buttons{
+        padding: 5px;
+    }
+}
