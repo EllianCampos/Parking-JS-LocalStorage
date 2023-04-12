@@ -1,0 +1,163 @@
+:root{
+    --Main_app_color: #0066CC;
+    --header-text_color: #f5f5f5;
+    --aside-bg_color: silver;
+}
+
+*{
+    box-sizing: border-box;
+} 
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    display: flex;
+    flex-flow: wrap row;
+    min-height: 85vh;
+    overflow: hidden;
+}
+
+.container{
+    width: 100%;
+}
+
+.container__head{
+    border: 5px solid var(--Main_app_color) ;
+    border-radius: 15px;
+    margin: 10vh 10vw;
+    padding: 15px;
+    width: 80%;
+    text-align: center;
+}
+
+.container__head--title{
+    color: green;
+}
+
+.container__head--show span{
+    font-weight: 1000;
+}
+
+.container__head--button{
+    background: none;
+    border: none;
+    color: purple;
+}
+
+.container__form{
+    width: 230px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+
+    padding: 10px;
+    box-sizing: content-box;
+    box-shadow: 0 0 5px rgb(0 0 0 / .3);
+    border-radius: 15px;
+}
+
+.form__field{
+    background-color: white;
+    width: 230px;
+    padding: 10px;
+    padding-left: 15px;
+    border-radius: 15px;
+    text-align: left;
+    margin-bottom: 10px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    box-shadow: 0 0 5px rgb(0 0 0 / .3);
+
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.form__field--input,
+.form__button{
+    font-size: 1.1em;
+}
+
+.form__field--icon{
+    height: 20px;
+    margin-top: 5px;
+}
+
+.form__field--input{
+    width: 70%;
+    border: 0;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.form__fiel--link{
+    background-color: transparent;
+    color: var(--Main_app_color);
+    font-size: .9em;
+    text-decoration: none;
+    border: none;
+    position: absolute;
+    bottom: 5px; right: 5px;
+}
+
+.form__button{
+    width: 230px;
+    height: 50px;
+    border: none;
+    border-radius: 15px;
+    background-color: white;   
+    box-shadow: 0 0 5px rgb(0 0 0 / .3); 
+} 
+
+.customWindow{
+    position: absolute;
+    z-index: 10;
+    width: 100vw;
+    height: 100vh;
+    background: white;
+    /* text-align: center; */
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.customWindow__form{
+    text-align: center;
+}
+
+.customWindow__form label,
+.customWindow__form input,
+.customWindow__form recover-password {
+    display: block;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.password_component{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.customWindow__table tbody td{
+    border-top: 2px solid var(--Main_app_color);
+}
+
+
+.btnSalir{
+    position: absolute;
+    top: 5px;
+    margin-top: 5px;
+    z-index: 30;
+
+    background-color: rgb(0, 255, 255);
+    border-radius: 50%;
+    filter: invert(1);
+}
+
+.hide{
+    display: none;
+}
