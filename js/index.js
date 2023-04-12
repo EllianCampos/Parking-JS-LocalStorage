@@ -220,7 +220,8 @@ form_login.addEventListener('submit', (e) => {
     for (const user of array_users) {
         // Validar que coincida con el nombre de usuario
         if (user.name == form_login_account.value && user.password == form_login_password   .value) {
-            alert('Acceso autorizado')
+            // alert('Acceso autorizado')
+            location.href = 'main.html' 
             return
         }
     }
