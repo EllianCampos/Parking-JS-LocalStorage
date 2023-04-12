@@ -20,7 +20,7 @@ const updateTable = () => {
   // Obtener el array de vehiculos
   let ArrayVehiclesEntered = JSON.parse(
     localStorage.getItem("k_vehiclesEntered")
-  );
+  )
 
   // Agregar los datos a la tabla
   for (const vehicle of ArrayVehiclesEntered) {
