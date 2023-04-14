@@ -36,6 +36,10 @@ const tableRegister = document.getElementById('tableRegister')
 const tableRegister__head = document.getElementById('tableRegister__head')
 const tableRegister__body = document.getElementById('tableRegister__body')
 
+// IDs botones 
+const btnSalir = Array.from(document.querySelectorAll('.btnSalir'))
+const btnLogOut = document.getElementById('btnLogOut')
+
 /*
     Variables globales
 */
@@ -56,7 +60,6 @@ addEventListener("load", () => {
 })
 
 // Boton de salir
-const btnSalir = Array.from(document.querySelectorAll('.btnSalir'))
 for (const btn of btnSalir) {
     btn.addEventListener('click', () => {
         showMainPage()
@@ -64,6 +67,13 @@ for (const btn of btnSalir) {
         manageButtonsEvent()
     })
 }
+
+// Boton de cerrar sesión
+btnLogOut.addEventListener('click', () => {
+    if (window.confirm('¿Estas seguro que deseas cerrar sesión?')){
+        location.href = 'index.html'
+    }
+})
 
 btnPushVehicle.addEventListener('click', () => {
     showPush()   

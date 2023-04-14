@@ -33,6 +33,21 @@ body{
     margin: 0; 
 }
 
+.header__button_LogOut{
+    position: absolute;
+    top: 4px;
+    margin-top: 5px;
+    margin-left: 3px;
+    z-index: 30;
+    border: none;
+    color: white;
+    font-weight: 1000;
+    font-size: 1.1em;
+    background-color: rgb(255, 0, 0);
+    padding: 8px;
+    border-radius: 5px;
+}
+
 .header__button-Push{
     grid-area: push;
     justify-self: center;
