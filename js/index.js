@@ -59,23 +59,6 @@ const answer_days = document.querySelector('.recoveryMethod__answer--days select
 const answer_temp = document.querySelector('.recoveryMethod__answer--temp select')
 const answer_season = document.querySelector('.recoveryMethod__answer--season select')
 
-// const xx = document.getElementById('')
-// const xx = document.getElementById('')
-// const xx = document.getElementById('')
-// const xx = document.getElementById('')
-// const xx = document.getElementById('')
-// const xx = document.getElementById('')
-// const xx = document.getElementById('')
-// const xx = document.getElementById('')
-// const xx = document.getElementById('')
-// const xx = document.getElementById('')
-// const xx = document.getElementById('')
-// const xx = document.getElementById('')
-// const xx = document.getElementById('')
-// const xx = document.getElementById('')
-// const xx = document.getElementById('')
-// const xx = document.getElementById('')
-
 /**
  * Funcion inicial
  */

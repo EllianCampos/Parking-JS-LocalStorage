@@ -39,19 +39,31 @@ const tableRegister__body = document.getElementById('tableRegister__body')
 /*
     Variables globales
 */
-let hourInput
-let hourOuput
+// let hourInput
+// let hourOuput
 let idOfOut
+let dateInput
+let dateOutput
 
+addEventListener("load", () => {
+    updateTable()
+    manageButtonsEvent()
 
-/*
-    Inicializar cosas
-*/
-init()
+    // Crear las constantes del sistema
+    if (localStorage.getItem('k_pricePerMinute') == null) {
+        localStorage.setItem('k_pricePerMinute',12)
+    }
+})
 
-/*
-    Eventos de los botones
-*/
+// Boton de salir
+const btnSalir = Array.from(document.querySelectorAll('.btnSalir'))
+for (const btn of btnSalir) {
+    btn.addEventListener('click', () => {
+        showMainPage()
+        updateTable()
+        manageButtonsEvent()
+    })
+}
 
 btnPushVehicle.addEventListener('click', () => {
     showPush()   
@@ -60,30 +72,6 @@ btnPushVehicle.addEventListener('click', () => {
     /**
      * Generar el Id
      */
-    //#region Primera version del codigo para generar el id
-    // *********** CODIGO VIEJO LO DEJO POR EL RECUERDO Y EL TIEMPO QUE LE
-    // *********** METI PERO NO DISTINGUE SI EL ID YA EXISTE EN EL HISTORIAL
-    // Validar que exista la key: si no el id sera 1
-    // if (localStorage.getItem('k_register') == null &&
-    //     localStorage.getItem('k_vehiclesEntered') == null) 
-    // {
-    //     formIn_id.value = 1
-    // } else {
-    //     let ArrayVehiclesEntered = JSON.parse(localStorage.getItem('k_vehiclesEntered'))
-    //     let idEncontrado = false, id, arraID = []
-
-    //     for (const vehicle of ArrayVehiclesEntered) 
-    //     arraID.push(parseInt(vehicle.id))
-
-    //     for (let i = 1; !idEncontrado; i++) {
-    //         if (arraID.includes(i) == false ) {
-    //             idEncontrado = true
-    //             formIn_id.value = i
-    //         }      
-    //     }
-    // }
-    //#endregion
-
     if (localStorage.getItem('k_id') == null) {
         localStorage.setItem('k_id', 1)
         formIn_id.value = 1
@@ -100,12 +88,14 @@ btnPushVehicle.addEventListener('click', () => {
     let hours = date.getHours()
     let minutes = date.getMinutes()
 
+    dateInput = date
+
     if (minutes < 10)  minutes = '0' + minutes 
 
-    hourInput = hours + ':' + minutes
-    formIn_hourInput.value =  hourInput    
+    formIn_hourInput.value =  hours + ':' + minutes    
 })
 
+// Ver el historial
 btnRegister.addEventListener('click', () => {
     showRegister()
 
@@ -121,7 +111,6 @@ btnRegister.addEventListener('click', () => {
 
     // Agregar los registros a la tabla
     for (const register of arrayRegister) {
-        console.log('>>> 13')
         tableRegister__body.innerHTML += `
             <tr>
                 <td>ID: ${register.id}</td>
@@ -134,6 +123,7 @@ btnRegister.addEventListener('click', () => {
     }
 })
 
+// Ver la configuración
 btnSettings.addEventListener('click', () => {
     showSettings()
     formSettings_PricePerMinute.value = localStorage.getItem('k_pricePerMinute')
@@ -143,6 +133,12 @@ btnSettings.addEventListener('click', () => {
     Eventos de los formularios
 */
 
+formSettings.addEventListener('submit', (e) => {
+    e.preventDefault()
+    localStorage.setItem('k_pricePerMinute', formSettings_PricePerMinute.value)
+    alert('El valor del minuto se ha actualizado correctamente')
+})
+
 formPush.addEventListener('submit', (e) => {
     e.preventDefault();
     showPush()
@@ -151,7 +147,7 @@ formPush.addEventListener('submit', (e) => {
         id: formIn_id.value,
         plateNumber: formIn_plateNumber.value,
         TypeVehicle: formIn_selectTypeVehicule.selectedOptions[0].value,
-        timeInput: hourInput,
+        timeInput: dateInput,
         observations: formIn_observations.value,
     }
 
@@ -176,70 +172,61 @@ formPush.addEventListener('submit', (e) => {
 
 formOut.addEventListener('submit', (e) => {
     e.preventDefault()
+    
+    // Obtener el array de vehiculos
+    let ArrayVehiclesEntered = JSON.parse(localStorage.getItem("k_vehiclesEntered"))
 
+    // Determinar el indice del array para obtener los datos
+    const indexArray = ArrayVehiclesEntered.findIndex((element, indexArray) => {
+        if (element.id == idOfOut) {
+          return true
+        }
+      }
+    )
+
+    // Calcular el tiempo que permanacio dentro
     let pricePerMinut = parseInt(localStorage.getItem('k_pricePerMinute'))
-
-    let horaEntrada = formOut_hourInput.value.substring(0,2)
-    let minutosEntrada = formOut_hourInput.value.substring(3,5)
-    let horaSalida = formOut_hourOutput.value.substring(0,2)
-    let minutosSalida = formOut_hourOutput.value.substring(3,5)
-
-    //Calcular lo minutos transcurridos desde las 00:00 hasta la hora de entrada
-    let tEntrada = (horaEntrada * 60) + parseInt(minutosEntrada)
-
-    //Calcular lo minutos transcurridos desde las 00:00 hasta la hora de salida
-    let tSalida = (horaSalida * 60) + parseInt(minutosSalida)
-
-    let minutsStayed = tSalida - tEntrada
-
+    let hourInput = new Date(ArrayVehiclesEntered[indexArray].timeInput)
+    let hourOutput = new Date()
+    
+    let seconds = (hourOutput-hourInput) / 1000 
+    let minutsStayed = seconds / 60
     let montToPay = minutsStayed * pricePerMinut
 
+    // Craear un objeto del registro
     let newRegister = {
         id: formOut_id.value,
         plateNumber: formOut_plateNumber.value,
         TypeVehicle: formOut_selectTypeVehicule.selectedOptions[0].value,
-        timeInput: formOut_hourInput.value,
+        timeInput: hourInput,
         observations: formOut_observations.value,
-        timeOutput: formOut_hourOutput.value,
+        timeOutput: hourOutput,
         minutsStayed: minutsStayed,
         montToPay: montToPay
     }
 
+    // Guardar el vehículo en el registro
     if (localStorage.getItem('k_register') == null) {
         let arrayRegister = [newRegister]
-
         localStorage.setItem('k_register', JSON.stringify(arrayRegister))
     } else {
         let arrayRegister = JSON.parse(localStorage.getItem('k_register'))
-
         arrayRegister.push(newRegister)
-
         localStorage.setItem('k_register', JSON.stringify(arrayRegister))
     }
 
     // Eliminar el vehiculo
-    let ArrayVehiclesEntered = JSON.parse(localStorage.getItem('k_vehiclesEntered'))
-        
-    const indexArray = ArrayVehiclesEntered.findIndex((element, indexArray) => {
-        if (element.id == newRegister.id) {
-            return true
-        }
-    })
-
     ArrayVehiclesEntered.splice(indexArray,1)
-
     localStorage.setItem('k_vehiclesEntered', JSON.stringify(ArrayVehiclesEntered))    
 
-    showMainPage()
+    // Mensaje
+    alert('El total a pagar es: ' + montToPay)
 
+    // Pasos finales
+    showMainPage()
     updateTable()
     manageButtonsEvent()
 
-    alert('El total a pagar es: ' + montToPay)
-})
-
-formSettings.addEventListener('submit', (e) => {
-    e.preventDefault()
-    localStorage.setItem('k_pricePerMinute', formSettings_PricePerMinute.value)
-    alert('El valor del minuto se ha actualizado correctamente')
+    // ESTA MUY MAL!!!!!!!!!!!!!!!!!!!!!
+    location.href = 'main.html'
 })
