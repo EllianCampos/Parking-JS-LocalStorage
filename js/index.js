@@ -44,20 +44,20 @@ const form_login_password = document.getElementById('form_login_password')
 const form_login_seePassword = document.getElementById('form_login_seePassword' )
 const form_login_button_recoverPassword = document.getElementById('form_login_button_recoverPassword')
 const form_login_button_register = document.getElementById('form_login_button_register')
-const form_login_showUsers = document.getElementById('form_login_showUsers')
+const form_login_showUsers = Array.from(document.querySelectorAll('.form_login_showUsers'))
 
 /**
  * Molde para los options de las preguntas y respuestas de seguridad
  */
-const secure_question = document.querySelector('.recoveryMethod__question select')
+const secure_question = Array.from(document.querySelectorAll('.recoveryMethod__question'))
 
-const container_answer_days = document.querySelector('.recoveryMethod__answer--days')
-const container_answer_temp = document.querySelector('.recoveryMethod__answer--temp')
-const container_answer_season = document.querySelector('.recoveryMethod__answer--season')
+const container_answer_days = Array.from(document.querySelectorAll('.recoveryMethod__answer--days'))
+const container_answer_temp = Array.from(document.querySelectorAll('.recoveryMethod__answer--temp'))
+const container_answer_season = Array.from(document.querySelectorAll('.recoveryMethod__answer--season'))
 
-const answer_days = document.querySelector('.recoveryMethod__answer--days select')
-const answer_temp = document.querySelector('.recoveryMethod__answer--temp select')
-const answer_season = document.querySelector('.recoveryMethod__answer--season select')
+const answer_days = Array.from(document.querySelectorAll('.recoveryMethod__answer--days select'))
+const answer_temp = Array.from(document.querySelectorAll('.recoveryMethod__answer--temp select'))
+const answer_season = Array.from(document.querySelectorAll('.recoveryMethod__answer--season select'))
 
 /**
  * Funcion inicial
@@ -101,43 +101,103 @@ for (const btn of btnSalir) {
 /**
  * Molde para los options de las preguntas y respuestas de seguridad
  */
-secure_question.addEventListener('change', (e) => {
-    container_answer_days.classList.add('hide')
-    container_answer_temp.classList.add('hide')
-    container_answer_season.classList.add('hide')
+for (const x of secure_question) {
+    x.addEventListener('change', (e) => {
+        for (const y of container_answer_days){
+            y.classList.add('hide')
+        }
+        for (const y of container_answer_temp){
+            y.classList.add('hide')
+        }
+        for (const y of container_answer_season){
+            y.classList.add('hide')
+        }
+    
+        if (e.target.value == 'day') {
+            for (const y of container_answer_days){
+                y.classList.remove('hide')
+            }
+            let question = e.target.options[e.target.options.selectedIndex].textContent
+            sessionStorage.setItem('k_question', question)
+    
+            for (const y of answer_days){
+                y.addEventListener('change', (e) => {
+                    let answer = e.target.options[e.target.options.selectedIndex].textContent
+                    sessionStorage.setItem('k_answer', answer)
+                })
+            }
+        } else if (e.target.value == 'temp') {
+            for (const y of container_answer_temp){
+                y.classList.remove('hide')
+            }
+            let question = e.target.options[e.target.options.selectedIndex].textContent
+            sessionStorage.setItem('k_question', question)
+    
+            for (const y of answer_temp){
+                y.addEventListener('change', (e) => {
+                    let answer = e.target.options[e.target.options.selectedIndex].textContent
+                    sessionStorage.setItem('k_answer', answer)
+                })
+            }
+        } else if (e.target.value == 'season') {
+            for (const y of container_answer_season){
+                y.classList.remove('hide')
+            }
+            let question = e.target.options[e.target.options.selectedIndex].textContent
+            sessionStorage.setItem('k_question', question)
+    
+            for (const y of answer_season){
+                y.addEventListener('change', (e) => {
+                    let answer = e.target.options[e.target.options.selectedIndex].textContent
+                    sessionStorage.setItem('k_answer', answer)
+                })
+            }
+        } else if (e.target.value == 'nothing') {
+            sessionStorage.removeItem('k_question')
+            sessionStorage.removeItem('k_answer')
+        }
+    })
+}
 
-    if (e.target.value == 'day') {
-        container_answer_days.classList.remove('hide')
-        let question = e.target.options[e.target.options.selectedIndex].textContent
-        sessionStorage.setItem('k_question', question)
+//CODIGO ANTIGUO
 
-        answer_days.addEventListener('change', (e) => {
-            let answer = e.target.options[e.target.options.selectedIndex].textContent
-            sessionStorage.setItem('k_answer', answer)
-        })
-    } else if (e.target.value == 'temp') {
-        container_answer_temp.classList.remove('hide')
-        let question = e.target.options[e.target.options.selectedIndex].textContent
-        sessionStorage.setItem('k_question', question)
+// secure_question.addEventListener('change', (e) => {
+//     container_answer_days.classList.add('hide')
+//     container_answer_temp.classList.add('hide')
+//     container_answer_season.classList.add('hide')
 
-        answer_temp.addEventListener('change', (e) => {
-            let answer = e.target.options[e.target.options.selectedIndex].textContent
-            sessionStorage.setItem('k_answer', answer)
-        })
-    } else if (e.target.value == 'season') {
-        container_answer_season.classList.remove('hide')
-        let question = e.target.options[e.target.options.selectedIndex].textContent
-        sessionStorage.setItem('k_question', question)
+//     if (e.target.value == 'day') {
+//         container_answer_days.classList.remove('hide')
+//         let question = e.target.options[e.target.options.selectedIndex].textContent
+//         sessionStorage.setItem('k_question', question)
 
-        answer_season.addEventListener('change', (e) => {
-            let answer = e.target.options[e.target.options.selectedIndex].textContent
-            sessionStorage.setItem('k_answer', answer)
-        })
-    } else if (e.target.value == 'nothing') {
-        sessionStorage.removeItem('k_question')
-        sessionStorage.removeItem('k_answer')
-    }
-})
+//         answer_days.addEventListener('change', (e) => {
+//             let answer = e.target.options[e.target.options.selectedIndex].textContent
+//             sessionStorage.setItem('k_answer', answer)
+//         })
+//     } else if (e.target.value == 'temp') {
+//         container_answer_temp.classList.remove('hide')
+//         let question = e.target.options[e.target.options.selectedIndex].textContent
+//         sessionStorage.setItem('k_question', question)
+
+//         answer_temp.addEventListener('change', (e) => {
+//             let answer = e.target.options[e.target.options.selectedIndex].textContent
+//             sessionStorage.setItem('k_answer', answer)
+//         })
+//     } else if (e.target.value == 'season') {
+//         container_answer_season.classList.remove('hide')
+//         let question = e.target.options[e.target.options.selectedIndex].textContent
+//         sessionStorage.setItem('k_question', question)
+
+//         answer_season.addEventListener('change', (e) => {
+//             let answer = e.target.options[e.target.options.selectedIndex].textContent
+//             sessionStorage.setItem('k_answer', answer)
+//         })
+//     } else if (e.target.value == 'nothing') {
+//         sessionStorage.removeItem('k_question')
+//         sessionStorage.removeItem('k_answer')
+//     }
+// })
 
 /**
  *  Eventos de los formularos relacionados con la bienvenida
@@ -234,7 +294,7 @@ form_recoveryMethod.addEventListener('submit', (e) => {
  */
 form_recoverPassword.addEventListener('submit', (e) => {
     e.preventDefault()
-
+    
     // Validar el campo de texto del nombre
     if (form_recoverPassword_user.value == '') {
         alert('Debes ingresar tu nombre de usuario')
@@ -270,9 +330,7 @@ form_recoverPassword.addEventListener('submit', (e) => {
     }
 
     // Pasos finales
-    // container_answer_days.classList.add('hide')
-    // container_answer_temperature.classList.add('hide')
-    // container_answer_season.classList.add('hide')
+    customWindow_recoverPassword.classList.add('hide')
     // sessionStorage.clear()
 })
 
@@ -294,13 +352,16 @@ form_login_seePassword.addEventListener('click', () => {
 
 // Boton recueperar contraseña
 form_login_button_recoverPassword.addEventListener('click', () => {
-    alert('Funcionalidad en desarrollo')
-    // customWindow_recoverPassword.classList.remove('hide')
+    customWindow_recoverPassword.classList.remove('hide')
+    form_recoverPassword.reset()
 })
 
 // Boton registrarse
 form_login_button_register.addEventListener('click', () => {
     customWindow_account.classList.remove('hide')
+    form_account.reset()
+    form_password.reset()
+    form_recoveryMethod.reset()
 })
 
 // Boton ingresar
@@ -334,64 +395,67 @@ form_login.addEventListener('submit', (e) => {
 })
 
 // Boton elegir cuenta
-form_login_showUsers.addEventListener('click', () => {
-    // Mostrar la ventana   
-    customWindow_searchAccount.classList.remove('hide')
-
-    /*
-        Cargar los usuarios en la tabla
-    */
-
-    // Limpiar la tabla 
-    while (customWindow_searchAccount_tableBody.hasChildNodes()) {
-        customWindow_searchAccount_tableBody.removeChild(customWindow_searchAccount_tableBody.firstChild);
-    }
-
-    // Obtener el array de usuarios
-    let array_users = JSON.parse(localStorage.getItem('k_users'))
-
-    // Recorrer el array de usuarios y agregarlos a la tabla
-    for (const user of array_users) {
-        customWindow_searchAccount_tableBody.innerHTML += 
-        `<tr class="row">
-            <td>${user.name}</td>                             
-        </tr>` 
-    } 
-
-    /* 
-        Funcionalidad de seleccionar celdas
-    */
+for (const btnSearch of form_login_showUsers){
+    btnSearch.addEventListener('click', () => {
+        // Mostrar la ventana   
+        customWindow_searchAccount.classList.remove('hide')
     
-    // Crear un array con todos los elementos que contengan la clase 
-    // .row, es decir todas la filas de la tabla
-    const rows = Array.from(document.querySelectorAll('.row'))
-
-    // recorrer todas la filas y darles el evento de click
-    for (const row of rows) {
-        row.addEventListener('click', () => {
-            /*
-                Este codigo será para cada una de las filas
-            */
-
-            // Determinar el indice de la persona 
-            // en el array de personas
-            const index = row.rowIndex
-
-            // Obtener el nombre de usuario basado en el indice
-            // que tiene en la tabla
-            let array_users = JSON.parse(localStorage.getItem('k_users'))
-            const user = array_users[index-1]
-
-            // Ocultar la ventana
-            customWindow_searchAccount.classList.add('hide')
-            
-            // Colocar el nombre de usuario en el cuadro de texto
-            form_login_account.value = user.name
-
-            // Limpiar la tabla
-            while (customWindow_searchAccount_tableBody.hasChildNodes()) {
-                customWindow_searchAccount_tableBody.removeChild(customWindow_searchAccount_tableBody.firstChild);
-            }
-        })
-    }
-})
+        /*
+            Cargar los usuarios en la tabla
+        */
+    
+        // Limpiar la tabla 
+        while (customWindow_searchAccount_tableBody.hasChildNodes()) {
+            customWindow_searchAccount_tableBody.removeChild(customWindow_searchAccount_tableBody.firstChild);
+        }
+    
+        // Obtener el array de usuarios
+        let array_users = JSON.parse(localStorage.getItem('k_users'))
+    
+        // Recorrer el array de usuarios y agregarlos a la tabla
+        for (const user of array_users) {
+            customWindow_searchAccount_tableBody.innerHTML += 
+            `<tr class="row">
+                <td>${user.name}</td>                             
+            </tr>` 
+        } 
+    
+        /* 
+            Funcionalidad de seleccionar celdas
+        */
+        
+        // Crear un array con todos los elementos que contengan la clase 
+        // .row, es decir todas la filas de la tabla
+        const rows = Array.from(document.querySelectorAll('.row'))
+    
+        // recorrer todas la filas y darles el evento de click
+        for (const row of rows) {
+            row.addEventListener('click', () => {
+                /*
+                    Este codigo será para cada una de las filas
+                */
+    
+                // Determinar el indice de la persona 
+                // en el array de personas
+                const index = row.rowIndex
+    
+                // Obtener el nombre de usuario basado en el indice
+                // que tiene en la tabla
+                let array_users = JSON.parse(localStorage.getItem('k_users'))
+                const user = array_users[index-1]
+    
+                // Ocultar la ventana
+                customWindow_searchAccount.classList.add('hide')
+                
+                // Colocar el nombre de usuario en el cuadro de texto
+                form_login_account.value = user.name
+                form_recoverPassword_user.value = user.name
+    
+                // Limpiar la tabla
+                while (customWindow_searchAccount_tableBody.hasChildNodes()) {
+                    customWindow_searchAccount_tableBody.removeChild(customWindow_searchAccount_tableBody.firstChild);
+                }
+            })
+        }
+    })
+}

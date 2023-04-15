@@ -71,10 +71,6 @@ body{
     text-align: center;
 }
 
-.customWindow__table tbody td{
-    border-top: 2px solid var(--Main_app_color);
-}
-
 .form__field{
     background-color: white;
     width: 300px;
@@ -150,6 +146,30 @@ input[type="submit"]{
     background-color: rgb(0, 255, 255);
     border-radius: 50%;
     filter: invert(1);
+}
+
+.customWindow__table{
+    width: 200px;
+}
+
+.customWindow__table thead th{
+    padding-bottom: 15px;
+}
+
+.customWindow__table tbody td{
+    border-top: 2px solid var(--Main_app_color);
+}
+
+.customWindow__table td{
+    padding: 20px;
+}
+
+.customWindow__table tr:nth-child(even){
+    background-color: #f2f2f2;
+}
+
+.customWindow__table tr:hover {
+    background-color: #ddd;
 }
 
 .hide{
