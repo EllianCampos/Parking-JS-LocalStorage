@@ -10,9 +10,16 @@
 <body>  
     <!-- Ventana de bienvenida -- Cuenta -->
     <div class="customWindow hide" id="customWindow_account">
+        <div class="form__field">
+            <h2>Bienvenido al sistema de gestion de estacionamientos</h2>
+            <p>Crea una cuenta para poder gestionar el tiempo que permanecen los vehiculos estacionados.</p>
+        </div>
+    
         <form class="customWindow__form" id="form_account">
-            <label for="form_account_name">¿Cual será tu nombre de usuario?</label>
-            <input type="text" id="form_account_name">
+            <div class="form__field">
+                <label for="form_account_name">¿Cual será tu nombre de usuario?</label>
+                <input type="text" id="form_account_name">
+            </div>
             <input type="submit" value="Siguiente">
         </form>
     </div>
@@ -20,8 +27,10 @@
     <!-- Ventana de bienvenida -- Contraseña -->
     <div class="customWindow hide" id="customWindow_password">
         <form class="customWindow__form" id="form_password">
-            <label for="form_password_componet">Cual será tu contraseña?</label>
-            <input type="password" id="form_password_password">
+            <div class="form__field">
+                <label for="form_password_componet">Cual será tu contraseña?</label>
+                <input type="password" id="form_password_password">    
+            </div>
             <input type="submit" value="Siguiente">
         </form>
     </div>
@@ -29,49 +38,55 @@
     <!-- Ventana de bienvenida -- Metodo de recuperación -->
     <div class="customWindow hide" id="customWindow_recoveryMethod">
         <form class="customWindow__form" id="form_recoveryMethod">
-            <label for="">Configurá un metodo de recuperación para tu cuenta</label>
-            <div class="recoveryMethod">
-                <div class="recoveryMethod__question">
-                    <label for="secure_question">Pregunta de seguridad</label>
-                    <select name="secure_question">
-                        <option value="nothing">Elegir...</option>
-                        <option value="day">¿Cúal es tu día favorito de la semana?</option>
-                        <option value="temp">¿Prefieres el frío o el calor?</option>
-                        <option value="season">¿Cúal es tu estación del año preferida?</option>
-                    </select>
-                </div>
-                <div class="recoveryMethod__answer">
-                    <div class="recoveryMethod__answer--days hide">
-                        <label for="">Respuesta secreta</label>
-                        <select name="answer_days">
+            <div class="form__field">
+                <label for="">Configurá un metodo de recuperación para tu cuenta</label>
+            </div>
+            
+            <div class="form__field">
+                <div class="recoveryMethod">
+                    <div class="recoveryMethod__question">
+                        <label for="secure_question">Pregunta de seguridad</label>
+                        <select name="secure_question">
                             <option value="nothing">Elegir...</option>
-                            <option value="1">Lunes</option>
-                            <option value="2">Martes</option>
-                            <option value="3">Miercoles</option>
-                            <option value="4">Jueves</option>
-                            <option value="5">Viernes</option>
-                            <option value="6">Sabado</option>
-                            <option value="7">Domingo</option>
-                        </select>
-                    </div>    
-                    <div class="recoveryMethod__answer--temp hide">
-                        <label for="">Respuesta secreta</label>
-                        <select name="answer_temperature">
-                            <option value="nothing">Elegir...</option>
-                            <option value="">Frio</option>
-                            <option value="">Calor</option>
+                            <option value="day">¿Cúal es tu día favorito de la semana?</option>
+                            <option value="temp">¿Prefieres el frío o el calor?</option>
+                            <option value="season">¿Cúal es tu estación del año preferida?</option>
                         </select>
                     </div>
-                    <div class="recoveryMethod__answer--season hide">
-                        <label for="">Respuesta secreta</label>
-                        <select name="answer_season">
-                            <option value="nothing">Elegir...</option>
-                            <option value="">Invierno</option>
-                            <option value="">Verano</option>
-                        </select>
-                    </div> 
+                    <div class="recoveryMethod__answer">
+                        <div class="recoveryMethod__answer--days hide">
+                            <label for="">Respuesta secreta</label>
+                            <select name="answer_days">
+                                <option value="nothing">Elegir...</option>
+                                <option value="1">Lunes</option>
+                                <option value="2">Martes</option>
+                                <option value="3">Miercoles</option>
+                                <option value="4">Jueves</option>
+                                <option value="5">Viernes</option>
+                                <option value="6">Sabado</option>
+                                <option value="7">Domingo</option>
+                            </select>
+                        </div>    
+                        <div class="recoveryMethod__answer--temp hide">
+                            <label for="">Respuesta secreta</label>
+                            <select name="answer_temperature">
+                                <option value="nothing">Elegir...</option>
+                                <option value="">Frio</option>
+                                <option value="">Calor</option>
+                            </select>
+                        </div>
+                        <div class="recoveryMethod__answer--season hide">
+                            <label for="">Respuesta secreta</label>
+                            <select name="answer_season">
+                                <option value="nothing">Elegir...</option>
+                                <option value="">Invierno</option>
+                                <option value="">Verano</option>
+                            </select>
+                        </div> 
+                    </div>
                 </div>
             </div>
+            
             <input type="submit" value="Crear cuenta">
         </form>
     </div>  
@@ -101,7 +116,7 @@
     <!-- Ventana PRINCIPAL -->
     <div class="container">
         <div class="container__head">
-            <h1 class="container__head--title">Login GG</h1>
+            <h1 class="container__head--title">Estacionamiento</h1>
             <p class="container__head--show">
                 Programado por 
                 <span>Ellian Campos</span>                    
@@ -116,7 +131,8 @@
             <div class="form__field">
                 <img src="assets/icons/User.svg" alt="User icon" class="form__field--icon">
                 <input type="text" class="form__field--input" placeholder="Usuario" id="form_login_account">
-                <input type="button" value="^" id="form_login_showUsers">
+                <!-- <input type="button" value="^" id="form_login_showUsers"> -->
+                <img src="assets/icons/search.svg" alt="Icon search" id="form_login_showUsers">
                 <input type="button" id="form_login_button_register" value="Registrarme">
             </div>
             <div class="form__field">
